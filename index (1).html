@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Eddis-Véroux Kimpouny – Réseaux, systèmes et cybersécurité</title>
+<meta name="description" content="Portfolio d’Eddis-Véroux Kimpouny : réseaux, systèmes et cybersécurité (Red Team, Blue Team, SOC, Active Directory). Casablanca, Maroc.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#EDF1F5; --panel:#FFFFFF; --ink:#13203A; --muted:#51607A;
+  --line:#C9D3E0; --signal:#2447F5; --warn:#E8A317; --ok:#12805C;
+  --term:#0F1B33; --term-ink:#DCE6F7;
+  --head:"Bricolage Grotesque","Helvetica Neue",Arial,sans-serif;
+  --body:"IBM Plex Sans","Helvetica Neue",Arial,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{background:var(--paper);color:var(--ink);font:400 1.0625rem/1.65 var(--body)}
+a{color:var(--signal);text-underline-offset:3px}
+a:focus-visible,button:focus-visible{outline:3px solid var(--warn);outline-offset:3px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+header.nav{position:sticky;top:0;z-index:10;background:rgba(237,241,245,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;justify-content:space-between;align-items:center;height:60px}
+.logo{font:800 1.1rem var(--head);color:var(--ink);text-decoration:none}
+.nav ul{display:flex;gap:22px;list-style:none;font-size:.95rem}
+.nav ul a{color:var(--muted);text-decoration:none}
+.nav ul a:hover{color:var(--signal)}
+section{padding:88px 0 0}
+h1,h2,h3{font-family:var(--head);line-height:1.1;letter-spacing:-.02em}
+h1{font-size:clamp(2.6rem,6vw,4.6rem);font-weight:800;max-width:14ch}
+h2{font-size:clamp(1.8rem,3.5vw,2.5rem);font-weight:700;margin-bottom:32px}
+h3{font-size:1.2rem;font-weight:700}
+p{max-width:68ch}
+
+/* Hero */
+.hero{padding-top:72px}
+.hero .grid{display:grid;grid-template-columns:1.1fr 1fr;gap:48px;align-items:center}
+.lead{margin-top:24px;font-size:1.2rem;color:var(--muted);max-width:44ch}
+.cta{display:flex;gap:14px;margin-top:32px;flex-wrap:wrap}
+.btn{display:inline-block;padding:12px 22px;border-radius:6px;font-weight:600;text-decoration:none;border:2px solid var(--signal)}
+.btn.main{background:var(--signal);color:#fff}
+.btn.main:hover{background:#1a38c9;border-color:#1a38c9}
+.btn.alt{color:var(--signal)}
+.btn.alt:hover{background:var(--signal);color:#fff}
+.term{background:var(--term);color:var(--term-ink);border-radius:8px;padding:20px 22px;font:400 .86rem/1.75 var(--mono);box-shadow:0 18px 40px -20px rgba(19,32,58,.55);overflow-x:auto}
+.term .bar{display:flex;gap:7px;margin-bottom:14px}
+.term .bar i{width:10px;height:10px;border-radius:50%;background:#33466E}
+.term .cmd{color:#8FA6D6}
+.term .ms{color:var(--warn)}
+.term .dest{color:#6FE0B0}
+.term .row{white-space:pre;opacity:0}
+.term .row.on{opacity:1}
+.cursor{display:inline-block;width:8px;height:1em;background:var(--term-ink);vertical-align:-2px;animation:blink 1s steps(2) infinite}
+@keyframes blink{50%{opacity:0}}
+
+/* À propos */
+.about{display:grid;grid-template-columns:1.4fr 1fr;gap:48px;align-items:start}
+.about p+p{margin-top:16px}
+.photo{display:block;width:100%;max-width:260px;aspect-ratio:1/1;object-fit:cover;object-position:50% 20%;border-radius:6px;border:1px solid var(--line);margin-bottom:22px}
+.facts{list-style:none;border-top:1px solid var(--line)}
+.facts li{display:flex;justify-content:space-between;gap:16px;padding:12px 0;border-bottom:1px solid var(--line)}
+.facts span:first-child{color:var(--muted);flex-shrink:0}
+.facts span:last-child{font-weight:600;text-align:right}
+
+/* Compétences */
+.domains{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;border:1px solid var(--line);background:var(--line)}
+.domain{padding:26px;background:var(--panel);border-top:4px solid var(--signal)}
+.domain:nth-child(3n+2){border-top-color:var(--ok)}
+.domain:nth-child(3n){border-top-color:var(--warn)}
+.domain h3{margin-bottom:14px}
+.domain ul{list-style:none;display:flex;flex-wrap:wrap;gap:8px}
+.domain li{font-size:.9rem;padding:4px 10px;border:1px solid var(--line);border-radius:4px;background:var(--paper)}
+
+/* Parcours */
+.timeline{list-style:none;border-left:2px solid var(--signal);margin-left:6px}
+.timeline>li{position:relative;padding:0 0 36px 28px}
+.timeline>li::before{content:"";position:absolute;left:-8px;top:8px;width:14px;height:14px;background:var(--paper);border:2px solid var(--signal);border-radius:50%}
+.timeline .when{font:500 .85rem var(--mono);color:var(--muted)}
+.timeline h3{margin:4px 0 2px}
+.timeline .org{color:var(--muted);margin-bottom:8px}
+.timeline ul{padding-left:18px;max-width:68ch}
+.timeline ul li{margin-bottom:4px}
+
+/* Projets et formation */
+.proj{display:grid;grid-template-columns:200px 1fr;gap:24px;padding:24px 0;border-top:1px solid var(--line);align-items:start}
+.proj:last-child{border-bottom:1px solid var(--line)}
+.proj .tag{font:500 .85rem var(--mono);color:var(--muted)}
+.proj p{margin-top:6px;color:var(--muted)}
+
+/* Contact */
+.contact{background:var(--term);color:var(--term-ink);margin-top:96px;padding:80px 0}
+.contact h2{color:#fff}
+.contact p{color:#AFC0E0}
+.contact .links{display:flex;gap:28px;flex-wrap:wrap;margin-top:28px}
+.contact a{color:#fff;font-weight:600}
+footer{background:var(--term);color:#7F93BD;font-size:.88rem;padding:0 0 32px}
+
+@media (max-width:860px){
+  .hero .grid,.about{grid-template-columns:1fr}
+  .domains{grid-template-columns:1fr}
+  .proj{grid-template-columns:1fr;gap:6px}
+  .nav ul{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .cursor{animation:none}
+}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="logo" href="#top">Eddis-Véroux KIMPOUNY</a>
+    <nav aria-label="Navigation principale">
+      <ul>
+        <li><a href="#apropos">À propos</a></li>
+        <li><a href="#competences">Compétences</a></li>
+        <li><a href="#parcours">Parcours</a></li>
+        <li><a href="#projets">Projets</a></li>
+        <li><a href="#formation">Formation</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+<section class="hero">
+  <div class="wrap grid">
+    <div>
+      <h2>Réseaux, systèmes, cybersécurité, DevSecOps, Cloud et Virtualisation.</h2>
+      <p class="lead">Eddis-Véroux Kimpouny. Je me forme et je m’exerce en Red Team, Blue Team et administration systèmes pour comprendre une infrastructure autant par l’attaque que par la défense.</p>
+      <div class="cta">
+        <a class="btn main" href="#projets">Voir mes projets</a>
+        <a class="btn alt" href="#contact">Me contacter</a>
+      </div>
+    </div>
+    <div class="term" role="img" aria-label="Trace de route illustrant mon parcours : réseaux, systèmes, cybersécurité, jusqu’à votre projet">
+      <div class="bar"><i></i><i></i><i></i></div>
+      <div class="row cmd"># traceroute votre-projet.fr</div>
+      <div class="row"> 1  reseaux.lan          <span class="ms">2 ms</span>   TCP/IP, pfSense, Wireshark</div>
+      <div class="row"> 2  systemes.srv          <span class="ms">5 ms</span>   Linux, Windows, Active Directory</div>
+      <div class="row"> 3  securite.soc          <span class="ms">9 ms</span>   pentest, Wazuh, Suricata</div>
+      <div class="row dest"> 4  votre-projet.fr      <span class="ms">12 ms</span>  arrivé <span class="cursor"></span></div>
+    </div>
+  </div>
+</section>
+
+<section id="apropos">
+  <div class="wrap about">
+    <div>
+      <h2>À propos</h2>
+      <p>Professionnel IT spécialisé en réseaux, systèmes et cybersécurité, avec une double formation en développement Full Stack et en systèmes, réseaux et cybersécurité. Compétences en architecture réseau, administration Linux/Windows, Active Directory, sécurité réseau, IDS/IPS, SIEM/SOC, DevSecOps et CI/CD. Profil polyvalent couvrant l’infrastructure, la sécurité, la supervision, l’automatisation et le développement logiciel. Licence obtenue en 2025/2026 et poursuite en Master Systèmes, Réseaux & Cybersécurité en 2026/2027.</p>
+      <p>Toujours apprendre. Toujours expérimenter. Toujours chercher à comprendre. La cybersécurité n’est pas seulement une compétence technique pour moi, c’est un état d’esprit, une passsion fondée sur la curiosité, l’analyse et l’amélioration continue.</p>
+    </div>
+    <div>
+      <img class="photo" src="photo.jpg" alt="Photo d’Eddis-Véroux Kimpouny" width="387" height="408">
+      <ul class="facts">
+        <li><span>Domaine</span><span>Réseaux, Systèmes, Cybersécurité, Reverse engineering</span></li>
+        <li><span>Terrain depuis</span><span>2018 (IoT)</span></li>
+        <li><span>Localisation</span><span>Casablanca, Maroc</span></li>
+        <li><span>Langues</span><span>Français, Russe, Anglais technique</span></li>
+        <li><span>Intérêts</span><span>Veille sécurité, hardening, CTF, IoT</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="competences">
+  <div class="wrap">
+    <h2>Compétences</h2>
+    <div class="domains">
+      <div class="domain">
+        <h3>Cybersécurité</h3>
+        <ul><li>Pentest</li><li>Reconnaissance et énumération</li><li>Exploitation</li><li>Élévation de privilèges</li><li>Post-exploitation</li><li>Forensics</li><li>Réponse à incident</li><li>Hardening</li></ul>
+      </div>
+      <div class="domain">
+        <h3>Systèmes et AD</h3>
+        <ul><li>Linux</li><li>Windows</li><li>Active Directory</li><li>LDAP</li><li>Kerberos</li><li>PowerShell</li><li>Bash</li><li>Python</li><li>HTML</li><li>PHP</li><li>Administration systèmes</li></ul>
+      </div>
+      <div class="domain">
+        <h3>Réseaux et sécurité</h3>
+        <ul><li>TCP/IP</li><li>Analyse de trafic</li><li>Wireshark</li><li>tcpdump</li><li>pfSense</li><li>Snort</li><li>Suricata</li><li>Rsyslog</li></ul>
+      </div>
+      <div class="domain">
+        <h3>SOC et SIEM</h3>
+        <ul><li>Wazuh</li><li>Splunk</li><li>Monitoring</li><li>Analyse de logs</li><li>Investigation</li><li>Corrélation d’événements</li></ul>
+      </div>
+      <div class="domain">
+        <h3>Virtualisation</h3>
+        <ul><li>VirtualBox</li><li>VMware</li><li>Docker</li><li>Environnements de lab</li></ul>
+      </div>
+      <div class="domain">
+        <h3>Outils et plateformes</h3>
+        <ul><li>Nmap</li><li>Metasploit</li><li>Burp Suite</li><li>TryHackMe</li><li>Hack The Box</li><li>VulnHub</li><li>CTF</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="parcours">
+  <div class="wrap">
+    <h2>Parcours professionnel</h2>
+    <ol class="timeline">
+      <li>
+        <span class="when">Juin 2018 – aujourd’hui</span>
+        <h3>Contrôleur qualité, objets connectés (IoT)</h3>
+        <p class="org">Solutions30, Casablanca, Maroc</p>
+        <ul>
+          <li>Contrôle qualité des installations réalisées par les techniciens lors des déploiements IoT.</li>
+          <li>Vérification de la conformité et identification des écarts à corriger.</li>
+          <li>Suivi de la qualité des opérations terrain et amélioration continue des interventions.</li>
+        </ul>
+      </li>
+      <li>
+        <span class="when">Juin 2014 – octobre 2014</span>
+        <h3>Service IT, support technique</h3>
+        <p class="org">Privat Bank, Orel, Russie</p>
+        <ul>
+          <li>Support technique et administration générale des systèmes.</li>
+          <li>Participation à la maintenance et à la sécurité du parc informatique.</li>
+        </ul>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section id="projets">
+  <div class="wrap">
+    <h2>Projets et pratique</h2>
+    <article class="proj">
+      <span class="tag">Red Team, pentest</span>
+      <div><h3>Scénarios d’attaque en environnement d’entraînement</h3><p>Reconnaissance, énumération, exploitation et élévation de privilèges sur des machines de lab (TryHackMe, Hack The Box, VulnHub).</p></div>
+    </article>
+    <article class="proj">
+      <span class="tag">Active Directory</span>
+      <div><h3>Travaux pratiques autour de LDAP et Kerberos</h3><p>Manipulation de Windows et d’Active Directory, avec des méthodologies d’audit de domaines.</p></div>
+    </article>
+    <article class="proj">
+      <span class="tag">Blue Team, SOC</span>
+      <div><h3>Labs de supervision avec Wazuh</h3><p>Mise en place et configuration de labs, analyse de logs, surveillance de sécurité et investigation.</p></div>
+    </article>
+    <article class="proj">
+      <span class="tag">Réseau, forensics</span>
+      <div><h3>Analyse de trafic et de fichiers PCAP</h3><p>Diagnostic et analyse réseau avec Wireshark et tcpdump, notamment à partir de captures PCAP.</p></div>
+    </article>
+    <article class="proj">
+      <span class="tag">SOC open source</span>
+      <div><h3>Laboratoire de supervision, détection et réponse</h3><p>Conception d’un environnement de laboratoire orienté supervision, détection et réponse aux incidents.</p></div>
+    </article>
+  </div>
+</section>
+
+<section id="formation">
+  <div class="wrap">
+    <h2>Formation</h2>
+    <article class="proj">
+      <span class="tag">En cours</span>
+      <div><h3>Cycle Master, Réseaux, Systèmes et Cybersécurité</h3><p>Casablanca, Maroc</p></div>
+    </article>
+    <article class="proj">
+      <span class="tag">Diplômé</span>
+      <div><h3>Licence, Réseaux, Systèmes et Cybersécurité</h3><p>École Supérieure OSBT, Casablanca, Maroc</p></div>
+    </article>
+    <article class="proj">
+      <span class="tag">2013 – 2016</span>
+      <div><h3>Formation en informatique</h3><p>Université d’État d’Orel, Orel, Russie</p></div>
+    </article>
+  </div>
+</section>
+</main>
+
+<section class="contact" id="contact">
+  <div class="wrap">
+    <h2>Me contacter</h2>
+    <p>Un projet, une question ou une opportunité dans les réseaux, les systèmes, la cybersécurité ou en rétro-ingénierie ? Écrivez-moi.</p>
+    <div class="links">
+      <a href="mailto:eclatlepositif@gmail.com">eclatlepositif@gmail.com</a>
+      <a href="https://www.linkedin.com/in/eddis-véroux-kimpouny-73b6ab33b" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      <a href="https://github.com/votre-pseudo">GitHub</a>
+      <a href="./CV_KIM.pdf" download target="_blank" rel="noopener noreferrer">Télécharger mon CV</a>
+    </div>
+  </div>
+</section>
+<footer><div class="wrap">© <span id="y"></span> Eddis-Véroux Kimpouny</div></footer>
+
+<script>
+document.getElementById("y").textContent=new Date().getFullYear();
+(function(){
+  var rows=document.querySelectorAll(".term .row");
+  var reduce=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if(reduce){rows.forEach(function(r){r.classList.add("on")});return}
+  rows.forEach(function(r,i){setTimeout(function(){r.classList.add("on")},400+i*650)});
+})();
+</script>
+</body>
+</html>
